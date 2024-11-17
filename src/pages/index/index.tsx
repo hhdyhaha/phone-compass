@@ -1,14 +1,16 @@
 import {View, Text, Input} from '@tarojs/components'
-import {useLoad} from '@tarojs/taro'
+import Taro, {useLoad} from '@tarojs/taro'
 import './index.scss'
 import {useState} from "react";
-  const handleCategoryItemClick = (item) => {
-    console.log('点击了分类', item.name)
-  }
+
+const handleCategoryItemClick = (item) => {
+  Taro.navigateTo({url: '/pages/CategoryItem/index?item.id&item.name'})
+}
+
 function CategoryItem({item}) {
 
   return (
-    <View className='category-item' onClick={()=>handleCategoryItemClick(item)}>
+    <View className='category-item' onClick={() => handleCategoryItemClick(item)}>
       <Text className='category-item-text'>{item.icon}{item.name}</Text>
       <view className='arrow-right'></view>
     </View>
@@ -18,10 +20,10 @@ function CategoryItem({item}) {
 // 搜索框
 export const SearchBox = () => {
   return (
-      <Input
-        className='search-input'
-        placeholder='请输入搜索内容'
-      />
+    <Input
+      className='search-input'
+      placeholder='请输入搜索内容'
+    />
   )
 }
 
@@ -52,7 +54,7 @@ function Index() {
         <View className='category-box'>
           {categories.map((item) => {
             return (
-              <CategoryItem item={item} key={item.id}/>
+              <CategoryItem item={item} key={item.id} />
             )
           })}
         </View>

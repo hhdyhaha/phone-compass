@@ -1,6 +1,6 @@
 export default defineAppConfig({
   pages: [
-    'pages/index/index', "pages/UserInfoPage/index"],
+  'pages/index/index', "pages/UserInfoPage/index", "pages/CategoryItem/index"],
 
   tabBar: {
     color: '#666',
@@ -8,15 +8,15 @@ export default defineAppConfig({
     borderStyle: 'black',
     backgroundColor: '#fafafa',
     list: [
-      {
-        pagePath: 'pages/index/index',
-        text: '首页'
-      },
-      {
-        pagePath: 'pages/UserInfoPage/index',
-        text: '我的'
-      }
-    ]
+    {
+      pagePath: 'pages/index/index',
+      text: '首页'
+    },
+    {
+      pagePath: 'pages/UserInfoPage/index',
+      text: '我的'
+    }]
+
 
   },
   window: {

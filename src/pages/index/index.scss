@@ -17,12 +17,22 @@
     border-radius: 6px;
     padding: 0 20px;
 
+    // 标题
     .index-title {
       font-size: 50px;
       text-align: center;
       margin: 20px 0;
     }
 
+    //搜索框
+    .serbe-box {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #fff;
+      background-color: antiquewhite;
+    }
+
+    // 分类
     .category-box {
       width: 100%;
       display: flex;

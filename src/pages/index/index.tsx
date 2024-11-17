@@ -4,7 +4,7 @@ import './index.scss'
 import {useState} from "react";
 
 const handleCategoryItemClick = (item) => {
-  Taro.navigateTo({url: '/pages/CategoryItem/index?item.id&item.name'})
+  Taro.navigateTo({url: `/pages/CategoryItem/index?id=${item.id}&name=${item.name}`})
 }
 
 function CategoryItem({item}) {

@@ -6,7 +6,8 @@ import {useState} from "react";
 function CategoryItem({item}) {
   return (
     <View className='category-item'>
-      <Text>{item.icon}{item.name}</Text>
+      <Text className='category-item-text'>{item.icon}{item.name}</Text>
+      <view className='arrow-right'></view>
     </View>
   )
 }

@@ -1,18 +1,17 @@
-import {View, Text, Input} from '@tarojs/components'
-import Taro, {useLoad} from '@tarojs/taro'
+import { View, Text, Input } from '@tarojs/components'
+import Taro, { useLoad } from '@tarojs/taro'
 import './index.scss'
-import {useState} from "react";
+import { useState } from "react";
 
 const handleCategoryItemClick = (item) => {
-  Taro.navigateTo({url: `/pages/CategoryItem/index?id=${item.id}&name=${item.name}`})
+  Taro.navigateTo({ url: `/pages/CategoryItem/index?id=${item.id}&name=${item.name}` })
 }
 
-function CategoryItem({item}) {
-
+function CategoryItem({ item }) {
   return (
     <View className='category-item' onClick={() => handleCategoryItemClick(item)}>
       <Text className='category-item-text'>{item.icon}{item.name}</Text>
-      <view className='arrow-right'></view>
+      <View className='arrow-right'></View>
     </View>
   )
 }
@@ -22,19 +21,19 @@ export const SearchBox = () => {
   return (
     <Input
       className='search-input'
-      placeholder='请输入搜索内容'
+      placeholder='搜索使用技巧...'
     />
   )
 }
 
 function Index() {
   const [categories, setCategories] = useState([
-    {id: 1, name: '基础操作', icon: '📱'},
-    {id: 2, name: '安全设置', icon: '🔒'},
-    {id: 3, name: '省电技巧', icon: '🔋'},
-    {id: 4, name: '拍照技巧', icon: '📸'},
-    {id: 5, name: '应用推荐', icon: '🚀'},
-    {id: 6, name: '隐藏功能', icon: '🕵️'},
+    { id: 1, name: '基础操作', icon: '📱' },
+    { id: 2, name: '安全设置', icon: '🔒' },
+    { id: 3, name: '省电技巧', icon: '🔋' },
+    { id: 4, name: '拍照技巧', icon: '📸' },
+    { id: 5, name: '应用推荐', icon: '🚀' },
+    { id: 6, name: '隐藏功能', icon: '🕵️' },
   ]);
 
   useLoad(() => {
@@ -54,7 +53,7 @@ function Index() {
         <View className='category-box'>
           {categories.map((item) => {
             return (
-              <CategoryItem item={item} key={item.id} />
+            <CategoryItem item={item} key={item.id} />
             )
           })}
         </View>

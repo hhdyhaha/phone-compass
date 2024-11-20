@@ -1,7 +1,8 @@
 import {View, Text, Image} from '@tarojs/components'
 import Taro, {useLoad} from '@tarojs/taro'
+
 import './index.scss'
-import {useState} from "react";
+import {useState, useEffect } from "react";
 
 // 列表item
 function CategoryListItem({item, index}: any) {
@@ -14,7 +15,7 @@ function CategoryListItem({item, index}: any) {
       <View className='category-item-list-item-img'>
         {item.media.imagesUrl.map((img: string) => (
           <View className='category-item-list-item-img-item' key={img}>
-            <Image src={img} mode='widthFix' />
+            <Image src={img} mode='widthFix'/>
           </View>
         ))}
       </View>
@@ -23,10 +24,32 @@ function CategoryListItem({item, index}: any) {
 }
 
 export default function CategoryItem() {
-  const [guideList, setGuideList] = useState([
+  interface Params {
+    $taroTimestamp: number
+    id: string
+    name: string
+  }
+
+  const params = Taro.getCurrentInstance().router?.params as unknown as Params;
+  const parentId = params.id
+
+  interface GuideItem {
+    id: number;
+    categoryId: string;
+    title: string;
+    content: string;
+    tags: string[];
+    difficulty: string;
+    media: {
+      imagesUrl: string[];
+    };
+    updatedAt: string;
+  }
+
+  const [guideList, setGuideList] = useState<GuideItem[]>([
     {
       "id": 101,
-      "categoryId": 1,
+      "categoryId": '1',
       "title": "快速切换网络模式",
       "content": "在拨号界面输入 *#*#4636#*#*，即可快速切换网络模式。",
       "tags": ["网络", "快捷操作"],
@@ -37,12 +60,22 @@ export default function CategoryItem() {
       "updatedAt": "2024-11-16"
     }
   ])
+  const [filteredGuides, setFilteredGuides] = useState<GuideItem[]>([]); // 新增过滤后的列表
+
+  useEffect(() => {
+    const filterGuidesByCategory = () => {
+      return guideList.filter((item: any) => {
+        return item.categoryId === parentId
+      })
+    }
+    const newGuideList = filterGuidesByCategory()
+    setFilteredGuides(newGuideList)
+    console.log(newGuideList);
+
+  }, [guideList, parentId])
   useLoad(() => {
     console.log('Page loaded.')
   })
-
-  const params = Taro.getCurrentInstance().router?.params
-  console.log(params)
 
   return (
     <View className='category-item-box'>
@@ -50,7 +83,7 @@ export default function CategoryItem() {
       <View className='category-item-text'>{params.name}</View>
       {/*  列表*/}
       <View className='category-item-list'>
-        {guideList.map((item, index) => (
+        {filteredGuides.map((item, index) => (
           <CategoryListItem item={item} index={index} key={item.id} />
         ))}
       </View>

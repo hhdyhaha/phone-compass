@@ -15,7 +15,7 @@ function CategoryListItem({item, index}: any) {
       <View className='category-item-list-item-img'>
         {item.media.imagesUrl.map((img: string) => (
           <View className='category-item-list-item-img-item' key={img}>
-            <Image src={img} mode='widthFix'/>
+            <Image src={img} mode='widthFix' />
           </View>
         ))}
       </View>

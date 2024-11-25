@@ -2,10 +2,22 @@ import {View, Text, Image} from '@tarojs/components'
 import Taro, {useLoad} from '@tarojs/taro'
 
 import './index.scss'
-import {useState, useEffect } from "react";
+import {useState, useEffect} from "react";
 
 // 列表item
 function CategoryListItem({item, index}: any) {
+  const handlePreImage = (img: string) => {
+    Taro.previewMedia(
+      {
+        sources: [
+          {
+            url: img,
+            type: 'image'
+          }
+        ]
+      }
+    )
+  }
   return (
     <View className='category-item-list-item' key={item.id}>
       <View className='category-item-list-item-index'>{index + 1}</View>
@@ -15,7 +27,7 @@ function CategoryListItem({item, index}: any) {
       <View className='category-item-list-item-img'>
         {item.media.imagesUrl.map((img: string) => (
           <View className='category-item-list-item-img-item' key={img}>
-            <Image src={img} mode='widthFix' />
+            <Image src={img} mode='widthFix' onClick={() => handlePreImage(img)}/>
           </View>
         ))}
       </View>
@@ -84,7 +96,7 @@ export default function CategoryItem() {
       {/*  列表*/}
       <View className='category-item-list'>
         {filteredGuides.map((item, index) => (
-          <CategoryListItem item={item} index={index} key={item.id} />
+          <CategoryListItem item={item} index={index} key={item.id}/>
         ))}
       </View>
     </View>
